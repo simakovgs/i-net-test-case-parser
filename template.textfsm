@@ -1,0 +1,21 @@
+Value DEVICE_NAME (\w+\s\w+|\w+)
+Value STATE (\w+)
+Value TEMPERATURE (\d+\s+\w+)
+Value BANDWIDTH (\d+\s+\w+)
+Value DL_QUOTA (\d+\s+%)
+Value FREQUENCY_DOWNLINK (\d+\s+\w+)
+Value FREQUENCY_UPLINK (\d+\s+\w+)
+Value CROSSTALK_STREAM0_DOWNLINK ((-)?\d+.\d\s+\w+)
+Value CROSSTALK_STREAM1_DOWNLINK ((-)?\d+.\d\s+\w+)
+Value CROSSTALK_STREAM0_UPLINK ((-)?\d+.\d\s+\w+)
+Value CROSSTALK_STREAM1_UPLINK ((-)?\d+.\d\s+\w+)
+
+
+
+Start
+  ^\|\s+Device name\s+${DEVICE_NAME} -> Next
+  ^\|\s+State\s+${STATE}\s+\| .*Temperature\s+${TEMPERATURE}\s+\| -> Next
+  ^\|\s+Bandwidth\s+${BANDWIDTH}\s+\| .*DL quota\s+${DL_QUOTA}\s+\| -> Next
+  ^\|\s+Frequency\s+\|\s+${FREQUENCY_DOWNLINK}\s+\|\s+${FREQUENCY_UPLINK} -> Next
+  ^\|\s+Crosstalk\s+\|\s+${CROSSTALK_STREAM0_DOWNLINK}\s+\|\s+${CROSSTALK_STREAM1_DOWNLINK}\s+\|\s+${CROSSTALK_STREAM0_UPLINK}\s+\|\s+${CROSSTALK_STREAM1_UPLINK} -> Record
+
